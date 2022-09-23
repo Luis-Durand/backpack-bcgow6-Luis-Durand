@@ -1,0 +1,7 @@
+var 1nombre string  -----> Esta mal por el numero
+var apellido string -----> Bien
+var int edad -----> Mal declarado
+1apellido := 6 -----> Estaria bien pero no se debe poner numero
+var licencia_de_conducir = true -----> bien pero  debe ser camel case
+var estatura de la persona int -----> mal , hay espacios
+cantidadDeHijos := 2 -----> bien

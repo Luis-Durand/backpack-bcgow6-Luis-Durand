@@ -1,0 +1,5 @@
+  var apellido string = "Gomez"  -----> bien
+  var edad int = "35"  -----> mal , es un string y tiene int
+  boolean := "false";  ----->  error de sintaxis
+  var sueldo string = 45857.90  ----->  mal , es un float
+  var nombre string = "Julián"  -----> bien
