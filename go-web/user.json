@@ -1,0 +1,24 @@
+[
+    {
+       "Id":1,
+         "Nombre":"Juan",
+         "Apellido":"Perez",
+         "Email":"Juan@gmail.com",
+         "Edad":18,
+         "Altura":1.80,
+         "Activo":true,
+         "Creacion":"10/08"
+    } 
+    ,
+   {
+        "Id":2,
+         "Nombre":"Pepe",
+         "Apellido":"Diaz",
+         "Email":"Pepe@gmail.com",
+         "Altura":1.75,
+         "Activo":false,
+         "Creacion":"20/04"
+ 
+    } 
+
+]
