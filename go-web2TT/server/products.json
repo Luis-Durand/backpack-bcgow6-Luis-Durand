@@ -1,7 +1,14 @@
 [
   {
     "id": 1,
-    "name": "iphone 212",
+    "name": "iphone 1",
+    "type": "electrodomestico",
+    "price": 2020,
+    "amount": 50002
+  },
+  {
+    "id": 2,
+    "name": "iphone 500",
     "type": "electrodomestico",
     "price": 2020,
     "amount": 50002
