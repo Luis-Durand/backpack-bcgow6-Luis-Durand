@@ -10,11 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type request struct {
+type Request struct {
 	Name   string `json:"name" `
 	Type   string `json:"type" `
-	Amount int    `json:"amount" `
 	Price  int    `json:"price" `
+	Amount int    `json:"amount" `
 }
 
 type Product struct {
@@ -28,6 +28,17 @@ func NewHandler(p products.Service) *Product {
 
 }
 
+// GetAll godoc
+// @Summary     Show list products
+// @Tags     Products
+// @Description get products
+// @Produce     json
+// @Param       token header   string       true "TOKEN"
+// @Success     200   {object} web.Response "List Products"
+// @Failure     401   {object} web.Response "Unauthorized"
+// @Failure     500   {object} web.Response "Internal server error"
+// @Failure     404   {object} web.Response "Not found products"
+// @Router      /products [GET]
 func (s *Product) GetAll() gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
@@ -44,10 +55,10 @@ func (s *Product) GetAll() gin.HandlerFunc {
 			return
 		}
 
-		if len(prods) == 0 {
+		/* if len(prods) == 0 {
 			ctx.JSON(404, web.NewResponse(404, nil, "No  hay productos almacenados"))
 			return
-		}
+		} */
 
 		ctx.JSON(200, web.NewResponse(200, prods, ""))
 
@@ -55,6 +66,18 @@ func (s *Product) GetAll() gin.HandlerFunc {
 
 }
 
+// Store godoc
+// @Summary     Post product
+// @Tags     Products
+// @Description post product
+// @Accept      json
+// @Produce     json
+// @Param       token   header   string       true "TOKEN"
+// @Param       product body     Request      true "Product to update"
+// @Success     200     {object} web.Response "List Products"
+// @Failure     400     {object} web.Response "Bad Request"
+// @Failure     401     {object} web.Response "Unauthorized"
+// @Router      /products [POST]
 func (s *Product) Store() gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
@@ -63,7 +86,7 @@ func (s *Product) Store() gin.HandlerFunc {
 			ctx.JSON(401, web.NewResponse(401, nil, "Token invalido"))
 			return
 		}
-		var req request
+		var req Request
 		if err := ctx.ShouldBindJSON(&req); err != nil {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return
@@ -100,6 +123,19 @@ func (s *Product) Store() gin.HandlerFunc {
 
 }
 
+// Update godoc
+// @Summary     Update product products
+// @Tags     Products
+// @Description Update product
+// @Accept      json
+// @Produce     json
+// @Param       id      path     int          true "Id product"
+// @Param       token   header   string       true "TOKEN"
+// @Param       product body     Request      true "Product to update"
+// @Success     200     {object} web.Response "List Products"
+// @Failure     400     {object} web.Response "Bad Request"
+// @Failure     401     {object} web.Response "Unauthorized"
+// @Router      /products/{id} [PUT]
 func (s *Product) Update() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.Request.Header.Get("token")
@@ -107,7 +143,7 @@ func (s *Product) Update() gin.HandlerFunc {
 			ctx.JSON(401, web.NewResponse(401, nil, "Token invalido"))
 			return
 		}
-		var req request
+		var req Request
 		if err := ctx.BindJSON(&req); err != nil {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return
@@ -138,7 +174,7 @@ func (s *Product) Update() gin.HandlerFunc {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return
 		}
-		prods, err := s.service.Update(int(numId), req.Name, req.Type, req.Amount, req.Price)
+		prods, err := s.service.Update(int(numId), req.Name, req.Type, req.Price, req.Amount)
 		if err != nil {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return
@@ -147,6 +183,17 @@ func (s *Product) Update() gin.HandlerFunc {
 	}
 }
 
+// Delete godoc
+// @Summary     Delete product
+// @Tags     Products
+// @Description delete product
+// @Produce     json
+// @Param       token header   string       true "TOKEN"
+// @Param       id    path     int          true "Id product"
+// @Success     200   {object} web.Response "List Products"
+// @Failure     400   {object} web.Response "Bad Request"
+// @Failure     401   {object} web.Response "Unauthorized"
+// @Router      /products/{id} [DELETE]
 func (s *Product) Delete() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
@@ -176,6 +223,20 @@ func (s *Product) Delete() gin.HandlerFunc {
 	}
 }
 
+// UpdateNameAndPrice godoc
+// @Summary     Update name and price
+// @Tags     Products
+// @Description Update name and price
+// @Accept      json
+// @Produce     json
+// @Param       id      path     int          true "Id product"
+// @Param       token   header   string       true "TOKEN"
+// @Param       product body     Request      true "Product to update"
+// @Success     200     {object} web.Response "List Products"
+// @Failure     400     {object} web.Response "Bad Request"
+// @Failure     401     {object} web.Response "Unauthorized"
+// @Failure     404     {object} web.Response "Not found products"
+// @Router      /products/{id} [PATCH]
 func (s *Product) UpdateNameAndPrice() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.Request.Header.Get("token")
@@ -190,7 +251,7 @@ func (s *Product) UpdateNameAndPrice() gin.HandlerFunc {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return
 		}
-		var req request
+		var req Request
 		if err := ctx.BindJSON(&req); err != nil {
 			ctx.JSON(400, web.NewResponse(400, nil, err.Error()))
 			return

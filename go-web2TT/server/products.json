@@ -12,5 +12,12 @@
     "type": "electrodomestico",
     "price": 2020,
     "amount": 50002
+  },
+  {
+    "id": 3,
+    "name": "LAYS",
+    "type": "ALIMENTO",
+    "price": 800,
+    "amount": 500
   }
 ]

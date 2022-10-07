@@ -152,7 +152,7 @@ func (r *repository) UpdateNameAndPrice(id int, name string, price int) (Product
 		return Products{}, fmt.Errorf("No se encontro el producto %d", id)
 	}
 
-	if err := r.db.Read(arrProd); err != nil {
+	if err := r.db.Write(arrProd); err != nil {
 		return Products{}, err
 	}
 
