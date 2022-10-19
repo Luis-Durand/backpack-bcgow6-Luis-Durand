@@ -1,0 +1,18 @@
+Ejercicio 1 
+¿Cuáles son las diferencias entre White Box y Black Box?
+
+Según entendí el black box es un tipo de test que nosotros no veríamos su funcionalidad por dentro y evalúa el funcionamiento del componente ante diferentes escenarios (test funcionales , no func y de regresión)testea dependiendo del input q ingresemos , mientras q el white si vemos las funcionalidades por dentro , para ver el flujo ,seguridad y estructura del código , estos se usan en test unitarios o de integración.
+
+Ejercicio 2
+¿Qué es un test funcional?.
+Se basan en la entrada y salida del software con el objetivo de comprobar la respuesta del software ante cualquier escenario , antes de hacer este test debido pasar por el test unitario y de integración, validan el comportamiento funcional del software
+Test del Funcionamiento del programa en gral
+
+Ejercicio 3
+¿Qué es un Test de Integración?
+Básicamente es probar que los diferentes modulos funcionan de manera correcta al ser agrupadas
+
+Ejercicio 4
+Indicar las dimensiones de calidad prioritarias en MELI.
+Estandar iso 25010
+Funcionalidad , Rendimiento , Fiabilidad , Seguridad, Mantenibilidad

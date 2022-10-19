@@ -8,11 +8,11 @@ import (
 )
 
 type Products struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"  `
-	Type   string `json:"type" `
-	Price  int    `json:"price" `
-	Amount int    `json:"amount" `
+	Id     int    `json:"id" validate:"required"`
+	Name   string `json:"name" validate:"required" `
+	Type   string `json:"type" validate:"required"`
+	Price  int    `json:"price" validate:"required"`
+	Amount int    `json:"amount" validate:"required"`
 }
 
 var arrProducts []Products
