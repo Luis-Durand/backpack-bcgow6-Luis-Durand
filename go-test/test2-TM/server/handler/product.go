@@ -5,8 +5,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/internal/products"
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/pkg/web"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/internal/products"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/pkg/web"
 	"github.com/gin-gonic/gin"
 )
 

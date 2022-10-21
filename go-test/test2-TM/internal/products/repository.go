@@ -3,7 +3,7 @@ package products
 import (
 	"fmt"
 
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/pkg/store"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/pkg/store"
 )
 
 type Products struct {

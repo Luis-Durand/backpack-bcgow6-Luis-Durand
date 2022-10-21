@@ -1,8 +1,8 @@
 package main
 
 import (
-	"hackaton/internal/file"
-	"hackaton/internal/service"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/hackaton/internal/file"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/hackaton/internal/service"
 )
 
 func main() {

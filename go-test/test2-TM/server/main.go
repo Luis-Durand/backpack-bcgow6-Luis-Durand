@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/docs"
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/internal/products"
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/pkg/store"
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-web2TT/server/handler"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/docs"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/internal/products"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/pkg/store"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/server/handler"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"

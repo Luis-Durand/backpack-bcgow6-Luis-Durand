@@ -1,0 +1,215 @@
+basePath: /api/v1
+definitions:
+  handler.Request:
+    properties:
+      amount:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+      type:
+        type: string
+    type: object
+  web.Response:
+    properties:
+      code:
+        type: string
+      data: {}
+      error:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Practica
+    url: http://www.swagger.io/support
+  description: This API Handle MELI Products.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://developers.mercadolibre.com.ar/es_ar/terminos-y-condiciones
+  title: Bootcamp Go Wave 6 - API
+  version: "1.0"
+paths:
+  /products:
+    get:
+      description: get products
+      parameters:
+      - description: TOKEN
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/web.Response'
+        "404":
+          description: Not found products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/web.Response'
+      summary: Show list products
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: post product
+      parameters:
+      - description: TOKEN
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: Product to update
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/handler.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/web.Response'
+      summary: Post product
+      tags:
+      - Products
+  /products/{id}:
+    delete:
+      description: delete product
+      parameters:
+      - description: TOKEN
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: Id product
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/web.Response'
+      summary: Delete product
+      tags:
+      - Products
+    patch:
+      consumes:
+      - application/json
+      description: Update name and price
+      parameters:
+      - description: Id product
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: TOKEN
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: Product to update
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/handler.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/web.Response'
+        "404":
+          description: Not found products
+          schema:
+            $ref: '#/definitions/web.Response'
+      summary: Update name and price
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Update product
+      parameters:
+      - description: Id product
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: TOKEN
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: Product to update
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/handler.Request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List Products
+          schema:
+            $ref: '#/definitions/web.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/web.Response'
+      summary: Update product products
+      tags:
+      - Products
+swagger: "2.0"

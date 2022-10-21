@@ -1,7 +1,8 @@
 package file
 
 import (
-	"hackaton/internal/service"
+	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/hackaton/internal/service"
+
 	"os"
 
 	"github.com/gocarina/gocsv"
