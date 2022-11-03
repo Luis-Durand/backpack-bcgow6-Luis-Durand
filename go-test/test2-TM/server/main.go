@@ -29,8 +29,7 @@ import (
 // @BasePath /api/v1
 func main() {
 	if err := godotenv.Load(); err != nil {
-		err.Error()
-		return
+		panic(err)
 	}
 	db := store.NewStore(store.FileType, "./products.json")
 	repo := products.NewRepository(db)
@@ -49,6 +48,10 @@ func main() {
 	pr.PUT("/:id", serv.Update())
 	pr.DELETE("/:id", serv.Delete())
 	pr.PATCH("/:id", serv.UpdateNameAndPrice())
-	router.Run()
+
+	if err := router.Run(); err != nil {
+		panic(err)
+
+	}
 
 }

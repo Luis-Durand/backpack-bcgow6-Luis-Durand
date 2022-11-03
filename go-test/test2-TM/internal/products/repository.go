@@ -58,8 +58,8 @@ func (r *repository) LastId() (int, error) {
 func (r *repository) Store(id int, name, productType string, price int, amount int) (Products, error) {
 
 	var ps []Products
-	err := r.db.Read(&ps)
-	if err != nil {
+	if err := r.db.Read(&ps); err != nil {
+
 		return Products{}, nil
 	}
 
@@ -75,13 +75,17 @@ func (r *repository) Update(id int, name, productType string, price int, amount 
 
 	var arrProd []Products
 
-	r.db.Read(&arrProd)
+	if err := r.db.Read(&arrProd); err != nil {
+		return Products{}, err
+	}
 
 	newProd := Products{Name: name, Type: productType, Price: price, Amount: amount}
 	updated := false
+	var index int
 
 	for i := range arrProd {
 		if arrProd[i].Id == id {
+			index = i
 			newProd.Id = id
 			arrProd[i] = newProd
 			updated = true
@@ -89,20 +93,22 @@ func (r *repository) Update(id int, name, productType string, price int, amount 
 	}
 
 	if err := r.db.Write(arrProd); err != nil {
-		return Products{}, nil
+		return Products{}, err
 	}
 
 	if !updated {
 		return Products{}, fmt.Errorf("Producto %d no encontrado", id)
 	}
-	return newProd, nil
+	return arrProd[index], nil
 }
 
 func (r *repository) Delete(id int) error {
 
 	var arrProds []Products
 
-	r.db.Read(&arrProds)
+	if err := r.db.Read(&arrProds); err != nil {
+		return err
+	}
 
 	deleted := false
 	var index int
@@ -135,7 +141,9 @@ func (r *repository) UpdateNameAndPrice(id int, name string, price int) (Product
 
 	var arrProd []Products
 
-	r.db.Read(&arrProd)
+	if err := r.db.Read(&arrProd); err != nil {
+		return Products{}, err
+	}
 	updated := false
 	var updatedProd Products
 	for i := range arrProd {

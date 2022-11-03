@@ -4,19 +4,23 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/Luis-Durand/backpack-bcgow6-Luis-Durand/go-test/test2-TM/internal/products"
 	"github.com/stretchr/testify/assert"
 )
 
 type MockService struct {
-	product       products.Products
-	sliceProds    []products.Products
+	product       Products
+	sliceProds    []Products
+	errWrite      error
+	errRead       error
 	ReadWasCalled bool
 }
 
 func (m *MockService) Read(data interface{}) error {
+	if m.errRead != nil {
+		return m.errRead
+	}
 	m.ReadWasCalled = true
-	prods, ok := data.(*[]products.Products)
+	prods, ok := data.(*[]Products)
 	if !ok {
 		return errors.New("read failed")
 	}
@@ -28,8 +32,10 @@ func (m *MockService) Read(data interface{}) error {
 }
 
 func (m *MockService) Write(data interface{}) error {
-
-	produs, ok := data.([]products.Products)
+	if m.errWrite != nil {
+		return m.errWrite
+	}
+	produs, ok := data.([]Products)
 	if !ok {
 		return errors.New("read failed")
 	}
@@ -39,9 +45,9 @@ func (m *MockService) Write(data interface{}) error {
 
 }
 
-func TestUpdate(t *testing.T) {
+func TestUpdatee(t *testing.T) {
 
-	oneProd := products.Products{
+	oneProd := Products{
 		Id:     2,
 		Name:   "Magdalenas",
 		Type:   "Arcor",
@@ -49,7 +55,7 @@ func TestUpdate(t *testing.T) {
 		Amount: 1,
 	}
 
-	newProd := []products.Products{{
+	newProd := []Products{{
 		Id:     1,
 		Name:   "Lays",
 		Type:   "Snacks",
@@ -65,8 +71,8 @@ func TestUpdate(t *testing.T) {
 
 	mockDb := MockService{product: oneProd, sliceProds: newProd}
 
-	repo := products.NewRepository(&mockDb)
-	serv := products.NewService(repo)
+	repo := NewRepository(&mockDb)
+	serv := NewService(repo)
 
 	//act
 	prods, err := serv.Update(2, "Magdalenas", "Arcor", 310, 1)
@@ -76,11 +82,24 @@ func TestUpdate(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, oneProd, prods)
 	assert.True(t, mockDb.ReadWasCalled)
+
+}
+
+func TestUpdateFail(t *testing.T) {
+
+	mockDB := MockDB{sliceProds: []Products{}}
+	repo := NewRepository(&mockDB)
+	serv := NewService(repo)
+
+	prod, err := serv.Update(2, "rumba", "galletita", 300, 1)
+
+	assert.NotNil(t, err)
+	assert.Equal(t, Products{}, prod)
 }
 
 func TestDelete(t *testing.T) {
 
-	tee := []products.Products{
+	tee := []Products{
 		{
 			Id:     2,
 			Name:   "Leche",
@@ -90,7 +109,7 @@ func TestDelete(t *testing.T) {
 		},
 	}
 
-	oneProd := products.Products{
+	oneProd := Products{
 		Id:     1,
 		Name:   "Lays",
 		Type:   "Snacks",
@@ -98,7 +117,7 @@ func TestDelete(t *testing.T) {
 		Amount: 1,
 	}
 
-	newProd := []products.Products{{
+	newProd := []Products{{
 		Id:     1,
 		Name:   "Lays",
 		Type:   "Snacks",
@@ -114,8 +133,8 @@ func TestDelete(t *testing.T) {
 
 	mockDb := MockService{product: oneProd, sliceProds: newProd}
 
-	repo := products.NewRepository(&mockDb)
-	serv := products.NewService(repo)
+	repo := NewRepository(&mockDb)
+	serv := NewService(repo)
 
 	//act
 	err := serv.Delete(1)

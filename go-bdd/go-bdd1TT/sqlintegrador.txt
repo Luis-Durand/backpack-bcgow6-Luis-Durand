@@ -1,0 +1,48 @@
+
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+La primary key para la tabla clientes es el id o podria ser su dni, debido a q ese campo es unico y no se va a repetir.
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+La primary key para la tabla plan de internet es el identificacion del plan , debido a q ese campo es unico y no se va a repetir.
+
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+La relacion seria una a muchas la foreign key iria en la tabla clientes ya que es la tabla muchos , hace referencia a la tabla plan de internet y el campo seria identificacion del plan ya que ese campo es unico e irrepetible.
+
+
+EJERCICIO 4
+
+Plantear 10 consultas SQL que se podrían realizar a la base de datos. Expresar las sentencias.
+
+Mostrar todos los clientes
+SELECT * FROM clientes;
+
+Mostrar nombre y apellido de los clientes
+SELECT nombre , apellido FROM clientes;
+
+Mostrar nombre de los clientes que su apellido comienze con la letra m
+SELECT nombre FROM clientes WHERE apellido LIKE "m%";
+
+Mostrar nombre de los clientes que su fecha de nacimiento sea entre 2001 hasta 2004
+SELECT nombre,fecha_de_nacimiento FROM clientes WHERE fecha_de_nacimiento BETWEEN "2001-01-01" AND "2004-12-31";
+
+Mostrar nombre de los clientes ordenados segun el numero de dni
+SELECT nombre,dni FROM clientes ORDER BY dni ; 
+
+Mostrar la identificacion del plan de los planes de internet que tengan mayor velocidad
+SELECT id_plan FROM plan_internet ORDER BY velocidad DESC LIMIT 3;
+
+Mostrar la identificacion del plan de los 2 primeros planes de internet
+SELECT id_plan FROM plan_internet LIMIT 2;
+
+Mostrar el id plan de los clientes en donde mas se repita
+SELECT id_plan,COUNT(id_plan) AS total FROM clientes GROUP BY id_plan ORDER BY total;
+
+Mostrar el nombre de los clientes q sean de jujuy
+SELECT nombre FROM clientes WHERE provincia="jujuy";
+
+Mostrar la identificacion del plan de los planes de internes que mayor descuento tengan
+SELECT id_plan,descuento FROM plan_internet ORDER BY descuento DESC;
